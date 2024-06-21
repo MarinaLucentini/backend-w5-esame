@@ -18,8 +18,6 @@ public class StationServices {
     @Autowired
     StationRepository stationRepository;
     @Autowired
-    BuildingRepository buildingRepository;
-    @Autowired
     BuildingServices buildingServices;
     public void saveStation(Station station, String idBuilding){
 
@@ -36,7 +34,7 @@ public class StationServices {
  }
         stationsUpdate.add(station);
             building.setStationList( stationsUpdate);
-            buildingRepository.save(building);
+            buildingServices.saveBuilding(building);
             stationRepository.save(station);
         System.out.println("La postazione di tipo " + station.getTypeStation() + "è stata correttamente salvata nell'edificio: " + building.getName() + "situato in: " + building.getAddress());
 

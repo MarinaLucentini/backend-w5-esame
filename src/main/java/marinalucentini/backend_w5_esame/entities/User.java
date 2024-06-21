@@ -13,7 +13,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@ToString
+
 @NoArgsConstructor
 @Table(name = "users")
 public class User {
@@ -32,5 +32,16 @@ public class User {
         this.name = name;
         this.surname = surname;
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", id=" + id +
+                '}';
     }
 }
