@@ -39,9 +39,9 @@ public class StationServices {
             stationRepository.save(station);
         System.out.println("La postazione di tipo " + station.getType() + "è stata correttamente salvata nell'edificio: " + building.getName() + "situato in: " + building.getAddress());
     }
-    public List<Station> findByType(String typeString){
+    public List<Station> findByTypeAndCity(String typeString, String city){
         TypeStation type;
     type = TypeStation.valueOf(typeString.toUpperCase());
- return    stationRepository.findByType(type);
+ return    stationRepository.findByTypeAndCity(type, city);
     }
 }

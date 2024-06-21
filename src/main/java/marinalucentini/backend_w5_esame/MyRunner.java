@@ -37,7 +37,7 @@ public class MyRunner implements CommandLineRunner {
    //     userServices.saveUsers(user);
 //        System.out.println(userServices.findByUsername("Hammond Eggs"));
 //        System.out.println(userServices.findByNameAndSurname("Isira", "Palmieri"));
-    stationServices.findByType("OPEN_SPACE").forEach(el-> System.out.println(el));
+    stationServices.findByTypeAndCity("OPEN_SPACE", "San Ulrico").forEach(el-> System.out.println(el));
 
     }
 }
