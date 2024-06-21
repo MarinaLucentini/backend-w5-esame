@@ -12,7 +12,8 @@ import java.util.UUID;
 
 @Repository
 public interface StationRepository extends JpaRepository<Station, UUID> {
-    @Query("SELECT s FROM Station s WHERE s.type=:type AND s.building.city = :city")
+    @Query("SELECT s FROM Station s LEFT JOIN FETCH s.reservationList WHERE s.type=:type AND s.building.city = :city")
 List<Station> findByTypeAndCity(@Param("type") TypeStation typeStation,@Param("city") String city);
+
 
 }
