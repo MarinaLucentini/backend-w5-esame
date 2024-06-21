@@ -30,10 +30,10 @@ public class Station {
     @OneToMany(mappedBy = "station")
     private List<Reservation> reservationList;
 
-    public Station(String description, int maxCapacity, TypeStation typeStation, Building building) {
+    public Station(String description, int maxCapacity, TypeStation typeStation) {
         this.description = description;
         this.maxCapacity = maxCapacity;
         this.typeStation = typeStation;
-        this.building = building;
+
     }
 }
