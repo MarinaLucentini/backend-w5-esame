@@ -14,7 +14,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@ToString
+
 @NoArgsConstructor
 public class Station {
     @Id
@@ -36,5 +36,16 @@ public class Station {
         this.maxCapacity = maxCapacity;
         this.typeStation = typeStation;
 
+    }
+
+    @Override
+    public String toString() {
+        return "Station{" +
+                "building=" + building +
+                ", typeStation=" + typeStation +
+                ", maxCapacity=" + maxCapacity +
+                ", description='" + description + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

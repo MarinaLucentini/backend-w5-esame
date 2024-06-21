@@ -24,10 +24,13 @@ public class MyRunner implements CommandLineRunner {
         System.out.println(user);
         Building building = context.getBean(Building.class);
         System.out.println(building);
-        buildingServices.saveBuilding(building);
+       // buildingServices.saveBuilding(building);
         Station station = context.getBean(Station.class);
         System.out.println(station);
-        stationServices.saveStation(station, "1a640401-521d-4241-bd10-9f534178baef");
+      //  stationServices.saveStation(station, "1a640401-521d-4241-bd10-9f534178baef");
+        Building building1 =
+        buildingServices.findBuildingByIdWithStationList("1a640401-521d-4241-bd10-9f534178baef");
+        building1.getStationList().forEach(el-> System.out.println(el));
 
 
     }

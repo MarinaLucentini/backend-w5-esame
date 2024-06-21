@@ -16,7 +16,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@ToString
+
 @NoArgsConstructor
 public class Building {
     @Id
@@ -32,5 +32,15 @@ public class Building {
         this.name = name;
         this.address = address;
         this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Building{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                '}';
     }
 }
