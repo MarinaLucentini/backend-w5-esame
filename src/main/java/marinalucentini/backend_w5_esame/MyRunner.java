@@ -31,10 +31,12 @@ public class MyRunner implements CommandLineRunner {
         Station station = context.getBean(Station.class);
         System.out.println(station);
       //  stationServices.saveStation(station, "1a640401-521d-4241-bd10-9f534178baef");
-        Building building1 =
-        buildingServices.findBuildingByIdWithStationList("1a640401-521d-4241-bd10-9f534178baef");
-        building1.getStationList().forEach(el-> System.out.println(el));
-        userServices.saveUsers(user);
+//        Building building1 =
+//        buildingServices.findBuildingByIdWithStationList("1a640401-521d-4241-bd10-9f534178baef");
+//        building1.getStationList().forEach(el-> System.out.println(el));
+     //   userServices.saveUsers(user);
+        System.out.println(userServices.findByUsername("Hammond Eggs"));
+        System.out.println(userServices.findByNameAndSurname("Isira", "Palmieri"));
 
 
     }

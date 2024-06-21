@@ -17,4 +17,10 @@ public class UserServices {
         System.out.println("L'utente"+ user.getUsername() + " è stato salvato con successo!");
 
     }
+    public User findByUsername(String username){
+        return userRepository.findByUsername(username);
+    }
+    public User findByNameAndSurname(String name, String surname){
+        return userRepository.findByNameAndSurname(name, surname);
+    }
 }
