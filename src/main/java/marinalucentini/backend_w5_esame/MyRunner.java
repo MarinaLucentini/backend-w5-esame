@@ -27,17 +27,17 @@ public class MyRunner implements CommandLineRunner {
         System.out.println(user);
         Building building = context.getBean(Building.class);
         System.out.println(building);
-       // buildingServices.saveBuilding(building);
+      //  buildingServices.saveBuilding(building);
         Station station = context.getBean(Station.class);
-        System.out.println(station);
-      //  stationServices.saveStation(station, "1a640401-521d-4241-bd10-9f534178baef");
+       // System.out.println(station);
+       // stationServices.saveStation(station, "19ab0c03-4e9f-4d1b-b0dd-17787a9773d1");
 //        Building building1 =
 //        buildingServices.findBuildingByIdWithStationList("1a640401-521d-4241-bd10-9f534178baef");
 //        building1.getStationList().forEach(el-> System.out.println(el));
-     //   userServices.saveUsers(user);
-        System.out.println(userServices.findByUsername("Hammond Eggs"));
-        System.out.println(userServices.findByNameAndSurname("Isira", "Palmieri"));
-
+   //     userServices.saveUsers(user);
+//        System.out.println(userServices.findByUsername("Hammond Eggs"));
+//        System.out.println(userServices.findByNameAndSurname("Isira", "Palmieri"));
+    stationServices.findByType("OPEN_SPACE").forEach(el-> System.out.println(el));
 
     }
 }

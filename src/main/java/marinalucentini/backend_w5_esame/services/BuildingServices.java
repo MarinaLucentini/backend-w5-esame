@@ -14,9 +14,9 @@ public class BuildingServices {
     @Autowired
     BuildingRepository buildingRepository;
     public void saveBuilding(Building building){
-        if (buildingRepository.existsByAddress(building.getAddress()) ){
-            throw new RuntimeException("L'edificio con l'indirizzo:  " + building.getAddress()+ " è già in uso!");
-        }
+//        if (buildingRepository.existsByAddress(building.getAddress()) ){
+//            throw new RuntimeException("L'edificio con l'indirizzo:  " + building.getAddress()+ " è già in uso!");
+//        }
         buildingRepository.save(building);
         System.out.println("L'edificio " + building.getName() + " è stato aggiunto con successo nel db");
     }

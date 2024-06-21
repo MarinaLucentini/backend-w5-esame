@@ -2,6 +2,7 @@ package marinalucentini.backend_w5_esame.services;
 
 import marinalucentini.backend_w5_esame.entities.Building;
 import marinalucentini.backend_w5_esame.entities.Station;
+import marinalucentini.backend_w5_esame.enums.TypeStation;
 import marinalucentini.backend_w5_esame.exception.ElementNotFound;
 import marinalucentini.backend_w5_esame.repositories.BuildingRepository;
 import marinalucentini.backend_w5_esame.repositories.StationRepository;
@@ -36,11 +37,11 @@ public class StationServices {
             building.setStationList( stationsUpdate);
             buildingServices.saveBuilding(building);
             stationRepository.save(station);
-        System.out.println("La postazione di tipo " + station.getTypeStation() + "è stata correttamente salvata nell'edificio: " + building.getName() + "situato in: " + building.getAddress());
-
-
-
-
-
+        System.out.println("La postazione di tipo " + station.getType() + "è stata correttamente salvata nell'edificio: " + building.getName() + "situato in: " + building.getAddress());
+    }
+    public List<Station> findByType(String typeString){
+        TypeStation type;
+    type = TypeStation.valueOf(typeString.toUpperCase());
+ return    stationRepository.findByType(type);
     }
 }

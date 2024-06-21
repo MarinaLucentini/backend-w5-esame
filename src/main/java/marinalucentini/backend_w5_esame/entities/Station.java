@@ -23,7 +23,7 @@ public class Station {
     private String description;
     private int maxCapacity;
     @Enumerated(EnumType.STRING)
-    private TypeStation typeStation;
+    private TypeStation type;
 
     @ManyToOne
     @JoinColumn(name = "building_id")
@@ -34,7 +34,7 @@ public class Station {
     public Station(String description, int maxCapacity, TypeStation typeStation) {
         this.description = description;
         this.maxCapacity = maxCapacity;
-        this.typeStation = typeStation;
+        this.type = typeStation;
 
     }
 
@@ -42,7 +42,7 @@ public class Station {
     public String toString() {
         return "Station{" +
                 "building=" + building +
-                ", typeStation=" + typeStation +
+                ", typeStation=" + type +
                 ", maxCapacity=" + maxCapacity +
                 ", description='" + description + '\'' +
                 ", id=" + id +
