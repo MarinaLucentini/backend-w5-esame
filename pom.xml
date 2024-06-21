@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>marinalucentini</groupId>
-	<artifactId>backend-w5-esame</artifactId>
+	<artifactId>GestionePrenotazioni</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>backend-w5-esame</name>
 	<description>Demo project for Spring Boot</description>
