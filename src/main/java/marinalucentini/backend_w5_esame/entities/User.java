@@ -1,9 +1,6 @@
 package marinalucentini.backend_w5_esame.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +14,7 @@ import java.util.UUID;
 @Setter
 @ToString
 @NoArgsConstructor
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue
@@ -25,7 +23,7 @@ public class User {
     private String name;
     private String surname;
     private String email;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "utente")
     private List<Reservation> reservationList;
 
     public User(String username, String name, String surname, String email) {

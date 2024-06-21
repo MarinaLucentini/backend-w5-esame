@@ -25,8 +25,8 @@ public class Reservation {
     @JoinColumn(name = "station_id")
     private Station station;
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "utente_id")
+    private User utente;
 
     public Reservation(LocalDate date, LocalTime time) {
         this.date = date;
