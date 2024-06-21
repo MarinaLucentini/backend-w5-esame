@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ public class User {
     private String surname;
     private String email;
     @OneToMany(mappedBy = "utente")
-    private List<Reservation> reservationList;
+    private List<Reservation> reservationList = new ArrayList<>();
 
     public User(String username, String name, String surname, String email) {
         this.username = username;

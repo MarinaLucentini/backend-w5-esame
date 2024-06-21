@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +26,7 @@ public class Building {
     private String address;
     private String city;
     @OneToMany(mappedBy = "building")
-    private List<Station> stationList;
+    private List<Station> stationList = new ArrayList<>();
 
     public Building(String name, String address, String city) {
         this.name = name;

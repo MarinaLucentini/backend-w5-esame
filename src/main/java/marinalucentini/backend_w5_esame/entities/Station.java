@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import marinalucentini.backend_w5_esame.enums.TypeStation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public class Station {
     @JoinColumn(name = "building_id")
     private Building building;
     @OneToMany(mappedBy = "station")
-    private List<Reservation> reservationList;
+    private List<Reservation> reservationList = new ArrayList<>();
 
     public Station(String description, int maxCapacity, TypeStation typeStation) {
         this.description = description;
