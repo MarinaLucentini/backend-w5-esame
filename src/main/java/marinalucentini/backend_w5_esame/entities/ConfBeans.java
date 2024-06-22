@@ -8,12 +8,17 @@ import org.springframework.context.annotation.Scope;
 
 import java.util.Locale;
 import java.util.Random;
+import java.util.Scanner;
 
 @Configuration
 public class ConfBeans {
     @Bean
     public Faker getFaker(){
         return new Faker(Locale.ITALY);
+    }
+    @Bean
+    public Scanner getScanner(){
+        return new Scanner(System.in);
     }
     @Bean
     public Random getRandom(){
@@ -33,7 +38,7 @@ public class ConfBeans {
     @Scope ("prototype")
     public Station station(){
         TypeStation typeStation = TypeStation.PRIVATE;
-        switch (getRandom().nextInt(1,3)){
+        switch (getRandom().nextInt(0,4)){
             case 1:{
                 typeStation = TypeStation.OPEN_SPACE;
                 break;

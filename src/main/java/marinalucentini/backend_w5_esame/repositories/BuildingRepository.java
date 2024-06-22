@@ -14,4 +14,5 @@ public interface BuildingRepository extends JpaRepository<Building, UUID> {
 boolean existsByAddress(String address);
     @Query("SELECT b FROM Building b LEFT JOIN FETCH b.stationList WHERE b.id = :id")
     Optional<Building> findByIdWithStations(@Param("id") UUID id);
+    Building findByName (String name);
 }
