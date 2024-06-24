@@ -14,6 +14,7 @@ public class BuildingServices {
     @Autowired
     BuildingRepository buildingRepository;
     public void saveBuilding(Building building){
+
         buildingRepository.save(building);
         System.out.println("L'edificio " + building.getName() + " è stato aggiunto con successo nel db");
 
