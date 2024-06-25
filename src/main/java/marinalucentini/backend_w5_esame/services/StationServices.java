@@ -44,4 +44,7 @@ public class StationServices {
     type = TypeStation.valueOf(typeString.toUpperCase());
  return    stationRepository.findByTypeAndCity(type, city);
     }
+    public List<Station> findByCity(String city){
+        return stationRepository.findByCity(city);
+    }
 }

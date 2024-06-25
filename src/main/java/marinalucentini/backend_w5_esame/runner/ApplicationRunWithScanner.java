@@ -2,9 +2,14 @@ package marinalucentini.backend_w5_esame.runner;
 
 import marinalucentini.backend_w5_esame.entities.Building;
 import marinalucentini.backend_w5_esame.entities.Station;
+import marinalucentini.backend_w5_esame.entities.User;
 import marinalucentini.backend_w5_esame.enums.TypeStation;
+import marinalucentini.backend_w5_esame.exception.InvalidAddressException;
+import marinalucentini.backend_w5_esame.exception.InvalidCityException;
+import marinalucentini.backend_w5_esame.exception.ValidationEmailException;
 import marinalucentini.backend_w5_esame.services.BuildingServices;
 import marinalucentini.backend_w5_esame.services.StationServices;
+import marinalucentini.backend_w5_esame.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -23,10 +28,24 @@ AnnotationConfigApplicationContext context;
 private Building building = new Building();
 private Station station = new Station();
 private TypeStation type = TypeStation.PRIVATE;
+private User newUser = new User();
 @Autowired
     BuildingServices buildingServices;
 @Autowired
     StationServices stationServices;
+@Autowired
+    UserServices userServices;
+    private void validateAddress(String address) throws InvalidAddressException {
+        if (!address.matches("^Via\\s+([A-Za-z]+\\s?)+,\\s?\\d+$")) {
+            throw new InvalidAddressException(address);
+        }
+    }
+
+    private void validateCity(String city) throws InvalidCityException {
+        if (!city.matches("[a-zA-Z\\s]+")) {
+            throw new InvalidCityException(city);
+        }
+    }
 public void haddleAddStationAtBuildig(Scanner scanner, Building buildingfound){
     int typeStation = 0;
     boolean exitStation = false;
@@ -250,24 +269,105 @@ haddleAddStationAtABuilngFond(scanner,buildingServices);
                     break;
                 }
                 case 2:{
-                    // **** NUOVO UTENTE
-                    break;
-                }
-                case 3:{
+                    System.out.println("Benvenuto e grazie per averci scelto");
+                    System.out.println("Per favore compila il modulo sottostante");
+                    System.out.println("Nome");
+                    String name = scanner.nextLine();
+                    System.out.println("Cognome");
+                    String surname = scanner.nextLine();
+                    System.out.println("Username");
+                    String username = scanner.nextLine();
+                    String email = null;
+                    while (true) {
+                        System.out.println("Email");
+                        email = scanner.nextLine();
+                        try {
+                            ValidationEmailException.validateEmail(email);
+                            break;
+                        } catch (ValidationEmailException e) {
+                            System.err.println(e.getMessage());
+                        }
+                    }
+                    newUser.setName(name);
+                    newUser.setSurname(surname);
+                    newUser.setUsername(username);
+                    newUser.setEmail(email);
+                    userServices.saveUsers(newUser);
+                    System.out.println("Siamo lieti che tu abbia scelto la nostra applicazione");
+                    boolean operationNewUser = false;
+                    while (!operationNewUser){
+                        System.out.println("Dimmi quale operazione vuoi fare");
+                        System.out.println("Premi 1 se vuoi cercare tutte le postazioni disponibili in una città");
+                        System.out.println("Premi 2 se vuoi cercare tutte le postazioni disponibili in base al tipo per una determinata città");
+                        System.out.println("Premi 3 se vuoi tornare indietro");
+                       try {
+                           int userChoice = Integer.parseInt(scanner.nextLine());
+                           switch (userChoice) {
+                               case 1: {
+                                   System.out.println("Digita il nome della città");
+                                   String city = scanner.nextLine();
+                                   List<Station> stationsFound = stationServices.findByCity(city);
+                                   System.out.println("Le postazione disponibili per la città cercata sono: " + stationsFound.size());
+                                   System.out.println("Ecco l'elenco completo");
+                                   int stationIndex = -1;
+                                   for (int i = 0; i < stationsFound.size(); i++) {
+                                       Station el = stationsFound.get(i);
+                                       System.out.println("Numero: " + (i + 1) + " " +
+                                               "Tipo: " + el.getType()
+                                               + "Eidficio: " + el.getBuilding().getName() + "situato in: " + el.getBuilding().getAddress()
+
+                                       );
+                                   }
+                                   while (true) {
+                                       System.out.println("Inidicami il numero dell'edificio al quale vuoi inserire la postazione");
+                                       try {
+                                           stationIndex = Integer.parseInt(scanner.nextLine()) - 1;
+                                           if (stationIndex >= 0 && stationIndex < stationsFound.size()) {
+                                               Station selectedStation = stationsFound.get(stationIndex);
+                                               System.out.println("La postazione che hai selezionato è di tipo: " + selectedStation.getType() + " con id: " + selectedStation.getId()
+                                                       + "" +
+                                                       "situata nell'edificio :" +
+                                                       "" +
+                                                       selectedStation.getBuilding().getName() + " " +
+                                                       "all'indirizzo:"
+                                                       + selectedStation.getBuilding().getAddress()
+                                               );
+                                               System.out.println("Vuoi fare una prenotazione a questa postazione?");
+                                               System.out.println("Premi 1 per continuare");
+                                               System.out.println("Premi 2 per tornare indietro");
+
+                                   break;
+                                           }
+
+                                       } catch (NumberFormatException e) {
+                                           System.err.println("Devi inserire un numero");
+                                       }
+
+                                   }
+
+
+                                   // **** NUOVO UTENTE
+                               }
+
+                           }
+                       } catch (NumberFormatException e){
+                           throw new Exception("Devi inserire un numero");
+                       }}}
+                case 3: {
                     // **** UTENTE REGISTRATO
                     break;
                 }
-                case 4:{
+                case 4: {
                     System.out.println("Grazie per averci scelto arrivederci!");
                     // *** USCITA DALL'APPLICAZIONE
                     break;
                 }
-                default:{
+                default: {
                     System.out.println("Scelta non valida");
                     break;
                 }
+    }
+        scanner.close();
+}
             }
         }
-        scanner.close();
-    }
-}
