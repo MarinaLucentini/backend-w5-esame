@@ -11,6 +11,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Scanner;
 
 @Order(2)
@@ -41,19 +42,19 @@ public void haddleAddStationAtBuildig(Scanner scanner, Building buildingfound){
                 case 1:{
                     type = TypeStation.PRIVATE;
                     station.setType(type);
-
+exitStation= true;
                     break;
                 }
                 case 2:{
                     type = TypeStation.OPEN_SPACE;
                     station.setType(type);
-
+exitStation=true;
                     break;
                 }
                 case 3:{
                     type = TypeStation.MEETING_ROOM;
                     station.setType(type);
-
+exitStation=true;
                     break;
                 }
                 case 4:{
@@ -153,13 +154,54 @@ boolean exitBuilding = false;
 
 
 }
+public void haddleAddStationAtABuilngFond(Scanner scanner, BuildingServices buildingServices){
+
+   List<Building>  allBuildingFound = buildingServices.findAllBuilding();
+    System.out.println("Gli edifici disponibili nel database sono " + allBuildingFound.size());
+    System.out.println("Ecco la lista completa");
+    for (int i = 0; i < allBuildingFound.size(); i++) {
+        Building el = allBuildingFound.get(i);
+        System.out.println("Numero: " + (i +1) + " " +
+                "Nome:" + el.getName());
+    }
+    int buildingIndex = -1;
+while (true){
+    System.out.println("Inidicami il numero dell'edificio al quale vuoi inserire la postazione");
+    try {
+        buildingIndex = Integer.parseInt(scanner.nextLine()) - 1;
+        if (buildingIndex >= 0 && buildingIndex < allBuildingFound.size()) {
+            Building selectedBuilding = allBuildingFound.get(buildingIndex);
+            System.out.println("L'edificio che hai selezionato è: " + selectedBuilding.getName() + " con id: " + selectedBuilding.getId());
+            System.out.println("Sei sicuro di voler aggiungere la postazione a questo edificio?");
+            System.out.println("Premi 1 per continuare");
+            System.out.println("Premi 2 per tornare indietro");
+
+            int confirmation = Integer.parseInt(scanner.nextLine());
+            if (confirmation == 1) {
+                haddleAddStationAtBuildig(scanner, selectedBuilding);
+                break;
+            } else if (confirmation == 2) {
+                break;
+            } else {
+                System.out.println("Scelta non valida. Riprova.");
+            }
+        } else {
+            System.err.println("Numero non valido, riprova.");
+        }
+    } catch (NumberFormatException e) {
+        System.err.println("Devi inserire un numero");
+    }
+}
+
+
+}
     @Override
     public void run(String... args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Benvenuti nella nostra applicazione per la gestione delle prenotazioni");
         int sceltaIniziale= 0;
         while (sceltaIniziale != 4){
-            System.out.println("Premi 1 se sei l'amministratore e vuoi creare una nuova postazione");
+            System.out.println("Premi 1 se sei l'amministratore e vuoi creare una nuova postazione o un nuovo edificio");
             System.out.println("Premi 2 se sei un nuovo utente e vuoi registrarti");
             System.out.println("Premi 3 se sei un utente già registrato e vuoi prenotare una postazione");
             System.out.println("Premi 4 per uscire");
@@ -188,6 +230,7 @@ boolean exitBuilding = false;
 
                                         break;
                                     case 2:
+haddleAddStationAtABuilngFond(scanner,buildingServices);
                                         // ***** AGGIUNGERE POSTAZIONE *****
                                         break;
                                     case 3:

@@ -7,6 +7,7 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -24,5 +25,8 @@ public class BuildingServices {
     }
     public Building findBuildingByName(String name){
         return buildingRepository.findByName(name);
+    }
+    public List<Building> findAllBuilding(){
+        return buildingRepository.findAll();
     }
 }
